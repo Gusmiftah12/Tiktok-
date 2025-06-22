@@ -1,8 +1,6 @@
 name: TikTok Viewbot
 
-on:
-  workflow_dispatch:  # manual trigger dari tab Actions
-
+on: [push]
 jobs:
   run-bot:
     runs-on: ubuntu-latest
