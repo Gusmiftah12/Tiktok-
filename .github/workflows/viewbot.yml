@@ -1,7 +1,7 @@
 name: TikTok Viewbot
 
 on:
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:  # manual trigger dari tab Actions
 
 jobs:
   run-bot:
@@ -19,12 +19,15 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install selenium
+        pip install selenium webdriver-manager
 
-    - name: Setup Chrome & Chromedriver
-      uses: browser-actions/setup-chrome@v1
+    - name: Install Google Chrome
+      run: |
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
 
     - name: Run TikTok Viewbot
       run: |
         python tiktok.py
-        
